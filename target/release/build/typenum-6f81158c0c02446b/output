@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/mehul/Development/Rust_Demo/Calculator/mycalculatordapp/target/release/build/typenum-6f81158c0c02446b/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/mehul/Development/Rust_Demo/Calculator/mycalculatordapp/target/release/build/typenum-6f81158c0c02446b/out/op.rs
