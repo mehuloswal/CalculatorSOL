@@ -21,15 +21,64 @@ describe("mycalculatordapp", () => {
     const account = await program.account.calculator.fetch(
       calculator.publicKey
     );
-    assert.ok(account.gretting === "Welcome to Solana");
+    assert.ok(account.greeting === "Welcome to Solana");
     _calculator = calculator;
   });
 
-  it("Adds two numbers", async function () {});
+  it("Adds two numbers", async function () {
+    const calculator = _calculator;
+    await program.rpc.add(new anchor.BN(2), new anchor.BN(3), {
+      accounts: {
+        calculator: calculator.publicKey,
+      },
+    });
+    const account = await program.account.calculator.fetch(
+      calculator.publicKey
+    );
+    assert.ok(account.result.eq(new anchor.BN(5)));
+    assert.ok(account.generate === "Welcome to Solana");
+  });
 
-  it("Multiplies two numbers", async function () {});
+  it("Subtracts two numbers", async function () {
+    const calculator = _calculator;
+    await program.rpc.subtract(new anchor.BN(5), new anchor.BN(3), {
+      accounts: {
+        calculator: calculator.publicKey,
+      },
+    });
+    const account = await program.account.calculator.fetch(
+      calculator.publicKey
+    );
+    assert.ok(account.result.eq(new anchor.BN(2)));
+    assert.ok(account.greeting === "Welcome to Solana");
+  });
 
-  it("Subtracts two numbers", async function () {});
+  it("Multiplies two numbers", async function () {
+    const calculator = _calculator;
+    await program.rpc.multiply(new anchor.BN(5), new anchor.BN(3), {
+      accounts: {
+        calculator: calculator.publicKey,
+      },
+    });
+    const account = await program.account.calculator.fetch(
+      calculator.publicKey
+    );
+    assert.ok(account.result.eq(new anchor.BN(15)));
+    assert.ok(account.greeting === "Welcome to Solana");
+  });
 
-  it("Divides two numbers", async function () {});
+  it("Divides two numbers", async function () {
+    const calculator = _calculator;
+    await program.rpc.divide(new anchor.BN(15), new anchor.BN(3), {
+      accounts: {
+        calculator: calculator.publicKey,
+      },
+    });
+    const account = await program.account.calculator.fetch(
+      calculator.publicKey
+    );
+    assert.ok(account.result.eq(new anchor.BN(5)));
+    assert.ok(account.remainder.eq(new anchor.BN(0)));
+    assert.ok(account.greeting === "Welcome to Solana");
+  });
 });
