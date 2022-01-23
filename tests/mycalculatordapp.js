@@ -36,7 +36,7 @@ describe("mycalculatordapp", () => {
       calculator.publicKey
     );
     assert.ok(account.result.eq(new anchor.BN(5)));
-    assert.ok(account.generate === "Welcome to Solana");
+    assert.ok(account.greeting === "Welcome to Solana");
   });
 
   it("Subtracts two numbers", async function () {
